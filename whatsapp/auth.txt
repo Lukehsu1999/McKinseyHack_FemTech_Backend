@@ -1,0 +1,5 @@
+{
+"twilio_sid":"AC64e2e7390797da226bbbaa5c4e0e7491",
+"twilio_secret_token":"97ff1b771e613db2c6aa18e4596321db",
+"elsevier_key":"b76fc6687eb5e5ee11098a18ab74ff79"
+}
