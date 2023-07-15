@@ -1,0 +1,66 @@
+swagger: "2.0"
+info:
+  title: FemTech API MVP - OpenAPI 3.0
+  description: |-
+    This is a sample Meal Me Server based on the OpenAPI 3.0 specification.
+  version: 1.0.0
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /event/create:
+    post:
+      tags:
+        - Events
+      description: Create a new event and ask aws to send emails
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Event'
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+        '403':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Event:
+    type: object
+    properties:
+      meetinglink:
+        type: string
+      description:
+        type: string
+      title:
+        type: string
+      time:
+        type: string
+        format: date
+      userFilter:
+        type: array
+        items:
+          type: string
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
