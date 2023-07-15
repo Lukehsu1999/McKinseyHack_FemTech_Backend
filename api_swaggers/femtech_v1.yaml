@@ -51,7 +51,7 @@ definitions:
         type: string
       time:
         type: string
-        format: date
+        format: date-time
       userFilter:
         type: array
         items:
