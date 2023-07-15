@@ -13,8 +13,8 @@ def lambda_handler(event, context):
     def send_email(recipient, data):
         # recipient: (string) email address
         # data: (dict) restaurant information
-        SUBJECT = "Restaurant Recommendation from Dining Concierge"
-        BODY_TEXT = "default_body_text"
+        SUBJECT = "WWB Event coming~"
+        BODY_TEXT = data
         #### TODO: parse data into Body text ###
         
         CHARSET = "UTF-8"
@@ -50,4 +50,7 @@ def lambda_handler(event, context):
     sampleResData = {
         "resname": "Good to eat"
     }
-    send_email("th2881@columbia.edu", sampleResData)
+    recipients = event["recipients"]
+    msg = event["msg"]
+    for recip in recipients:
+        send_email(recip, msg)
