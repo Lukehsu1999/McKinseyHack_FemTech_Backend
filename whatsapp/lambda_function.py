@@ -3,9 +3,8 @@ import logging
 import json
 from twilio.rest import Client
 
-SENDER = 'whatsapp:+14155238886'
-
 def lambda_handler(event, context):
+    print("sender: ", event['sender'])
     print("recipients: ", event['recipients'])
     print("msg: ", event['msg'])
 
@@ -23,15 +22,21 @@ def lambda_handler(event, context):
     # Create a Twilio client
     client = Client(account_sid, auth_token)
 
+    sender = event["sender"]
     recipients = event["recipients"]
     msg = event["msg"]
+    
+    msg_ids = []
 
     # Send a WhatsApp message
 
     for recip in recipients:
         message = client.messages.create(
             body= msg,  # The message content
-            from_= SENDER,  # Your Twilio WhatsApp number
+            from_= sender,  # Your Twilio WhatsApp number
             to= recip  # The recipient's phone number in WhatsApp format
         )
+        msg_ids.append(message.sid)
         print('Message sent successfully. SID:', message.sid)
+    
+    return {"msg_ids": msg_ids, "status": "success"}
