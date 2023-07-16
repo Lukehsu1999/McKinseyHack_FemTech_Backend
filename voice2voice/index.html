@@ -50,10 +50,18 @@
 
   <body>
     <h1>Voice 2 Voice PoC</h1>
+
+    <h2>Settings</h2>
+    <p>Input Language:</p>
+    <input type="text" id="input_language" placeholder="zh" />
+    <p>Output Language:</p>
+    <input type="text" id="output_language" placeholder="en" />
+    <hr>
+
     <h2>Stage 1: Speech to Text</h2>
     <button id="record">Start Recording</button>
     <input type="text" id="transcript" />
-    <button id="search">Search</button>
+    <button id="demo">Full Demo</button>
     <div id="results"></div>
     <div style="clear: both"></div>
 
@@ -76,15 +84,11 @@
     <h2>Stage 2: Text to Text Translation</h2>
     <p>Input</p>
     <input type="text" id="translation_text" placeholder="Translate" />
-    <p>Input Language:</p>
-    <input type="text" id="input_language" placeholder="zh" />
-    <p>Output Language:</p>
-    <input type="text" id="output_language" placeholder="en" />
     <p>Output</p>
     <p id="translation_result"></p>
     <button id="translationbutton">Translate</button>
 
-    <h2>Stage 2: Text to Speech (English for now)</h2>
+    <h2>Stage 3: Text to Speech (English for now)</h2>
     <input type="text" id="text2speech_text" placeholder="Speak" />
     <button id="text2speechbutton">Speak</button>
 

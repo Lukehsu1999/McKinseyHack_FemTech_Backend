@@ -31,6 +31,7 @@ recognition.addEventListener("end", () => {
   transcriptInput.value = finalTranscript;
 });
 
+
 recordButton.addEventListener("click", () => {
   if (isRecording) {
     recognition.stop();
@@ -43,32 +44,39 @@ recordButton.addEventListener("click", () => {
   isRecording = !isRecording;
 });
 
-const searchButton = document.querySelector("#search");
-searchButton.addEventListener("click", () => {
+const fulldemoButton = document.querySelector("#demo");
+fulldemoButton.addEventListener("click", () => {
   const transcript = transcriptInput.value;
   console.log(transcript);
-  // make a get call to this url ${API_URL}/search?q=${transcript} and print the response body
-  fetch(`${API_URL}/search?q=${transcript}`, {
-    method: "GET",
-    headers: {
-      "x-api-key": "bojackhorsemanpeanutbutter",
-    },
-  })
+  const input_language = document.querySelector("#input_language").value;
+  const output_language = document.querySelector("#output_language").value;
+  console.log(input_language);
+  console.log(output_language);
+  fetch(
+    `https://txzc7rdsy6.execute-api.us-east-1.amazonaws.com/test0716/translate`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        msg: transcript,
+        from_lang: input_language,
+        to_lang: output_language,
+      }),
+    }
+  )
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const results = document.querySelector("#results");
-      results.innerHTML = "";
-      data.results.forEach((item) => {
-        const div = document.createElement("div");
-        const img = document.createElement("img");
-        img.style.height = "200px";
-        img.style.float = "left";
-        img.style.margin = "5px";
-        img.src = item;
-        div.appendChild(img);
-        results.appendChild(div);
-      });
+      result = data.body;
+      var msg = new SpeechSynthesisUtterance();
+      msg.text = result;
+      window.speechSynthesis.speak(msg);
+      
+    })
+    .catch((error) => {
+      console.error("Error:", error);
     });
 });
 
