@@ -82,6 +82,18 @@ text2speechButton.addEventListener("click", () => {
     window.speechSynthesis.speak(msg);
 });
 
+const translationButton = document.querySelector("#translationbutton");
+translationButton.addEventListener("click", () => {
+    // get the translation_text value
+    const translation_text = document.querySelector("#translation_text").value;
+    console.log(translation_text);
+    // get the input language and output language
+    const input_language = document.querySelector("#input_language").value;
+    const output_language = document.querySelector("#output_language").value;
+    console.log(input_language);
+    console.log(output_language);
+});
+
 const uploadButton = document.querySelector("#upload");
 uploadButton.addEventListener("click", () => {
 	const file = document.querySelector("#file").files[0];
